@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+  <!-- ✅ سكريبت الكابتشا هنا في الـ head -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="dark-mode">
 
@@ -131,9 +132,15 @@
           <button class="eye-btn" onclick="togglePass('signup-confirm')">👁</button>
         </div>
       </div>
+
+      <!-- ✅ ويدجت الكابتشا الحقيقية -->
       <div class="captcha-wrap">
-  <div class="g-recaptcha" data-sitekey="6Ldi-pwsAAAAAJpa98vIiZ5I5Lmgd-Mx9U4bZXnS" data-theme="dark"></div>
-</div>
+        <div class="g-recaptcha"
+             data-sitekey="6Ldi-pwsAAAAAJpa98vIiZ5I5Lmgd-Mx9U4bZXnS"
+             data-theme="dark">
+        </div>
+      </div>
+
       <div id="signup-error" class="form-error hidden"></div>
       <button class="btn-primary full" onclick="handleSignup()">
         <span id="signup-btn-text">إنشاء الحساب</span>
@@ -235,9 +242,7 @@
 
         <div class="history-section">
           <p class="history-label">المحادثات السابقة</p>
-          <div class="history-list" id="history-list">
-            <!-- populated by JS -->
-          </div>
+          <div class="history-list" id="history-list"></div>
         </div>
 
         <div class="sidebar-footer">
@@ -349,8 +354,9 @@
   <!-- Toast Notification -->
   <div id="toast" class="toast hidden"></div>
 
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-   <script src="script.js"></script>
+  <!-- ✅ السكريبتات في آخر الـ body (ترتيب صحيح) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
 </body>
 </html>
