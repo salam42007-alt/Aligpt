@@ -12,7 +12,7 @@ const SUPABASE_KEY  = 'sb_publishable_XP6PQTRgqfeDr1ItTkbWdA_Goe1Vafo';
 const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
 
 // Demo mode (no real keys needed to test)
-const DEMO_MODE = true;
+const DEMO_MODE = false;
 
 // ══════════════════════════════════════════
 // 2. APP STATE
