@@ -7,8 +7,8 @@
 // 1. CONFIG — ضع مفاتيحك هنا
 // ══════════════════════════════════════════
 
-const SUPABASE_URL  = 'https://your-project.supabase.co';
-const SUPABASE_KEY  = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL  = 'https://hjhtwurqcectnjpudsxl.supabase.co';
+const SUPABASE_KEY  = 'sb_publishable_XP6PQTRgqfeDr1ItTkbWdA_Goe1Vafo';
 const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
 
 // Demo mode (no real keys needed to test)
