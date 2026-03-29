@@ -8,7 +8,7 @@
 // ══════════════════════════════════════════
 
 const SUPABASE_URL  = 'https://hjhtwurqcectnjpudsxl.supabase.co';
-const SUPABASE_KEY  = 'sb_publishable_XP6PQTRgqfeDr1ItTkbWdA_Goe1Vafo';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqaHR3dXJxY2VjdG5qcHVkc3hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NDQ4MTEsImV4cCI6MjA5MDIyMDgxMX0.oRMx53sfFb6rAiHTiVT13jOL4YcONsOAm7t_FjPXtmg';
 const GEMINI_API_KEY = 'AIzaSyBvnrQtZnWM3jcjMUDnPbXVMmKthxoGQto';
  
 const DEMO_MODE = false;
