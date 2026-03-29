@@ -10,8 +10,7 @@
 const SUPABASE_URL  = 'https://hjhtwurqcectnjpudsxl.supabase.co';
 const SUPABASE_KEY  = 'sb_publishable_XP6PQTRgqfeDr1ItTkbWdA_Goe1Vafo';
 const GEMINI_API_KEY = window.env?.GEMINI_API_KEY || '';
-
-
+ 
 const DEMO_MODE = false;
  
 // ══════════════════════════════════════════
@@ -99,7 +98,6 @@ function toggleDarkMode() {
 async function handleLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
-  const errEl = document.getElementById('login-error');
   const btnText  = document.getElementById('login-btn-text');
   const spinner  = document.getElementById('login-spinner');
  
@@ -118,7 +116,6 @@ async function handleLogin() {
   try {
     if (DEMO_MODE) {
       await fakeDelay(1000);
-      // In demo mode, check against stored users
       const users = JSON.parse(localStorage.getItem('aligpt_users') || '[]');
       const found = users.find(u => u.email === email && u.password === pass);
       if (!found) throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
@@ -175,8 +172,11 @@ async function handleSignup() {
   if (pass !== confirm) {
     return showError('signup-error', 'كلمة المرور وتأكيدها غير متطابقتان');
   }
-  if (!appState.captchaVerified && !DEMO_MODE) {
-    return showError('signup-error', 'يرجى تأكيد أنك لست روبوتاً');
+ 
+  // ✅ التحقق من استجابة جوجل reCAPTCHA الحقيقية
+  const captchaResponse = grecaptcha.getResponse();
+  if (captchaResponse.length === 0) {
+    return showError('signup-error', 'يرجى تأكيد أنك لست روبوتاً بالضغط على المربع');
   }
  
   btnText.classList.add('hidden');
@@ -216,20 +216,6 @@ async function handleSignup() {
   }
 }
  
-// ══════════════════════════════════════════
-// 8. CAPTCHA (Mock)
-// ══════════════════════════════════════════
- 
-function toggleCaptcha(el) {
-  appState.captchaVerified = !appState.captchaVerified;
-  const check = document.getElementById('captcha-check');
-  check.textContent = appState.captchaVerified ? '✅' : '☐';
-  if (appState.captchaVerified) {
-    el.style.borderColor = 'var(--success)';
-  } else {
-    el.style.borderColor = '';
-  }
-}
  
 // ══════════════════════════════════════════
 // 9. ONBOARDING WIZARD
@@ -253,7 +239,6 @@ function selectChoice(btn, type) {
   const label = btn.querySelector('span:last-child').textContent;
   appState.onboardingData[type] = label;
  
-  // Show/hide "other" input
   const otherId = type === 'source' ? 'source-other' : 'purpose-other';
   const otherInput = document.getElementById(otherId);
   if (label === 'أخرى') {
@@ -282,7 +267,6 @@ function updateProgress() {
 }
  
 function finishOnboarding() {
-  // Save onboarding answers
   const sourceOther  = document.getElementById('source-other').value;
   const purposeOther = document.getElementById('purpose-other').value;
   if (sourceOther)  appState.onboardingData.source  = sourceOther;
@@ -312,7 +296,6 @@ function setupDashboard() {
  
   renderHistory();
  
-  // Start with a new chat if none active
   if (!appState.currentChatId) newChat();
 }
  
@@ -363,7 +346,6 @@ function loadChat(id) {
   appState.currentChatId = id;
   renderHistory();
   renderMessages();
-  // Close sidebar on mobile
   if (window.innerWidth <= 768) toggleSidebar(true);
 }
  
@@ -448,23 +430,19 @@ async function sendMessage() {
   const chat = appState.chats[appState.currentChatId];
   if (!chat) return;
  
-  // Update chat title on first message
   if (chat.messages.length === 0) {
     chat.title = truncate(text, 30);
     renderHistory();
   }
  
-  // Add user message
   chat.messages.push({ role: 'user', content: text, time });
   appendMessageToDOM('user', text, time);
   saveToStorage();
  
-  // Show typing
   const typing = document.getElementById('typing-indicator');
   typing.classList.remove('hidden');
   scrollToBottom();
  
-  // Disable send
   const sendBtn = document.getElementById('send-btn');
   sendBtn.disabled = true;
  
@@ -519,7 +497,7 @@ async function callGemini(messages) {
 function getDemoResponse(userMsg) {
   const msg = userMsg.toLowerCase();
   if (msg.includes('اسمك') || msg.includes('من أنت') || msg.includes('مني')) {
-    return 'أنا **AliGPT** 🤖 — مساعذكاء الاصطناعي الجزائري! صُنعت لأساعدك في البرمجة، الدراسة، أو حتى مجرد دردشة. كيف نقدر نعاونك اليوم؟ 😎';
+    return 'أنا **AliGPT** 🤖 — مساعد الذكاء الاصطناعي الجزائري! صُنعت لأساعدك في البرمجة، الدراسة، أو حتى مجرد دردشة. كيف نقدر نعاونك اليوم؟ 😎';
   }
   if (msg.includes('مرحب') || msg.includes('سلام') || msg.includes('ahla') || msg.includes('hello')) {
     return 'وعليكم السلام! 👋 أهلاً وسهلاً بك في **AliGPT**! أنا هنا لمساعدتك. اسألني أي حاجة تخطر على بالك! 🇩🇿';
@@ -593,7 +571,6 @@ function saveSettings() {
   }
  
   if (pass && pass.length >= 6) {
-    // In demo mode, update stored user
     if (DEMO_MODE && appState.user) {
       const users = JSON.parse(localStorage.getItem('aligpt_users') || '[]');
       const idx = users.findIndex(u => u.email === appState.user.email);
