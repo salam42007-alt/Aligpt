@@ -9,7 +9,7 @@
 
 const SUPABASE_URL  = 'https://hjhtwurqcectnjpudsxl.supabase.co';
 const SUPABASE_KEY  = 'sb_publishable_XP6PQTRgqfeDr1ItTkbWdA_Goe1Vafo';
-const GEMINI_API_KEY = 'AIzaSyCHRAAAv298SEvIU0RnPKq537JXf4SKYRk';
+const SUPABASE_KEY = window.env?.SUPABASE_KEY || 'YOUR_KEY_HERE';
 
 // Demo mode (no real keys needed to test)
 const DEMO_MODE = false;
