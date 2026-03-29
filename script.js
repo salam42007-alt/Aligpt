@@ -9,7 +9,7 @@
 
 const SUPABASE_URL  = 'https://hjhtwurqcectnjpudsxl.supabase.co';
 const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqaHR3dXJxY2VjdG5qcHVkc3hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NDQ4MTEsImV4cCI6MjA5MDIyMDgxMX0.oRMx53sfFb6rAiHTiVT13jOL4YcONsOAm7t_FjPXtmg';
-const GEMINI_API_KEY = 'AIzaSyBvnrQtZnWM3jcjMUDnPbXVMmKthxoGQto';
+const GEMINI_API_KEY = 'AIzaSyBO_F-4KKv5Gqau8x2mJVJkA-77SIa3Dc4';
  
 const DEMO_MODE = false;
  
